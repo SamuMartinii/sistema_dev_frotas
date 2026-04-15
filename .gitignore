@@ -1,0 +1,21 @@
+# Dependências do Node (muito pesadas para o GitHub)
+node_modules/
+
+# Variáveis de ambiente (Segurança: senhas e chaves de API)
+.env
+
+# Configurações locais da IDE WebStorm
+.idea/
+
+# Arquivos de log de erros
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Pasta de build final do React
+build/
+dist/
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
