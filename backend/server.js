@@ -10,7 +10,7 @@ app.use(express.json());
 
 // Rota inicial para teste
 app.get('/', (req, res) => {
-    res.send('API do Sistema de Frotas de Veículos rodando com sucesso! 🚀');
+    res.send('API do Sistema de Frotas de Veículos rodando com sucesso!');
 });
 
 const PORT = 3001;
