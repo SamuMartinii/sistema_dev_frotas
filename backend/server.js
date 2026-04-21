@@ -10,10 +10,23 @@ app.use(express.json());
 // Importação das Rotas
 const marcasRoutes = require('./routes/marcas'); 
 const modelosRoutes = require('./routes/modelos');
+const veiculosRoutes = require('./routes/veiculos');
+const usuariosRoutes = require('./routes/usuarios');
+const cidadesRoutes = require('./routes/cidades');
+const alocacoesRoutes = require('./routes/alocacoes');
+const manutencoesRoutes = require('./routes/manutencoes');
+const despesasRoutes = require('./routes/despesas');
+
 
 // Definição das Rotas
 app.use('/api/marcas', marcasRoutes);
 app.use('/api/modelos', modelosRoutes);
+app.use('/api/veiculos', veiculosRoutes); 
+app.use('/api/usuarios', usuariosRoutes);
+app.use('/api/cidades', cidadesRoutes);
+app.use('/api/alocacoes', alocacoesRoutes);
+app.use('/api/manutencoes', manutencoesRoutes);
+app.use('/api/despesas', despesasRoutes);
 
 // Rota inicial
 app.get('/', (req, res) => {
@@ -25,6 +38,5 @@ app.listen(PORT, () => {
     console.log(`✅ Servidor ativo em http://localhost:${PORT}`);
 });
 
-const veiculosRoutes = require('./routes/veiculos'); // Coloque junto com as outras importações
 
-app.use('/api/veiculos', veiculosRoutes); // Coloque junto com os outros app.use
+
