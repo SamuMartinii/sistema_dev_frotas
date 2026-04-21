@@ -1,23 +1,34 @@
 const express = require('express');
 const router = express.Router();
+const pool = require('../db');
 
-// Uso teste ate não configuraro MariaDB
-let marcas = [
-    { id: 1, nome: 'Volkswagen' },
-    { id: 2, nome: 'Ford' }
-];
-
-// Listagem da marca
-router.get('/', (req, res) => {
-    res.json(marcas);
+// POST
+router.post('/', async (req, res) => {
+    let conn;
+    try {
+        const { nome, obs } = req.body;
+        conn = await pool.getConnection();
+        const resDb = await conn.query("INSERT INTO marcas (nome, obs) VALUES (?, ?)", [nome, obs]);
+        res.status(201).json({ id: Number(resDb.insertId), nome, obs });
+    } catch (err) {
+        res.status(500).json({ error: "Erro ao salvar marca: " + err.message });
+    } finally {
+        if (conn) conn.end();
+    }
 });
 
-
-router.post('/', (req, res) => {
-    const { nome } = req.body;
-    const novaMarca = { id: marcas.length + 1, nome };
-    marcas.push(novaMarca);
-    res.status(201).json(novaMarca);
+// GET
+router.get('/', async (req, res) => {
+    let conn;
+    try {
+        conn = await pool.getConnection();
+        const rows = await conn.query("SELECT * FROM marcas");
+        res.json(rows);
+    } catch (err) {
+        res.status(500).json({ error: "Erro ao buscar marcas" });
+    } finally {
+        if (conn) conn.end();
+    }
 });
 
 module.exports = router;

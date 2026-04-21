@@ -4,11 +4,18 @@ require('dotenv').config();
 
 const app = express();
 
-// Middlewares
 app.use(cors());
 app.use(express.json());
 
-// Rota inicial para teste
+// Importação das Rotas
+const marcasRoutes = require('./routes/marcas'); 
+const modelosRoutes = require('./routes/modelos');
+
+// Definição das Rotas
+app.use('/api/marcas', marcasRoutes);
+app.use('/api/modelos', modelosRoutes);
+
+// Rota inicial
 app.get('/', (req, res) => {
     res.send('API do Sistema de Frotas de Veículos rodando com sucesso!');
 });
@@ -18,9 +25,6 @@ app.listen(PORT, () => {
     console.log(`✅ Servidor ativo em http://localhost:${PORT}`);
 });
 
-const marcasRoutes = require('./routes/marcas'); 
-const modelosRoutes = require('./routes/modelos');
+const veiculosRoutes = require('./routes/veiculos'); // Coloque junto com as outras importações
 
-
-app.use('/api/marcas', marcasRoutes);
-app.use('/api/modelos', modelosRoutes);
+app.use('/api/veiculos', veiculosRoutes); // Coloque junto com os outros app.use
